@@ -1,49 +1,33 @@
-# NOTE: Below is time limit exceeded solution because Codeforces is overloaded
-# and submitted solution is in queue a long time therefore I cannot finalize
-# an accepted solution
+# Store all l values to list_l
+# Store all r values to list_r
 #
-# Get the number of segments to an integer
-# Get all segments to an array
+# Formally we will assume that segment [a, b] covers segment [c, d], if they meet this condition
+# a ≤ c ≤ d ≤ b.
 #
-# Create a helper method called 'cover'
-# This helper method receives 2 segments list1 and list2, then identify whether
-# list1 covers list2 or not
+# Based on above condition, we gonna find min of all l and max of all r
+# to find a segment [l, r] that may cover all segments
+# l = min of list_l
+# r = max of list_r
 #
-# Initialize index variable which value is -1
-# Loop from start to end of array of segments with index i
-#   Initialize count variable which value is 0
-#   Loop from start to end of array of segments with index j
-#     If segments[i] equals to segments[j] skip to next iteration
-#     If segments[i] covers segments[j]
-#       Increase count by 1
-#
-#   After loop with j index finishes, if count equals to number of segments minus 1
-#     Store current index plus 1 to initialized index variable at the beginning
-#     Break from the loop with i
-#
-# Print index variable value
+# Next we loop from 1 to n and compare the segment we have just found
+# with all given segments by compare each list_l element with l and each list_r element with r
+# If there is a segment, print the index of segment
 
 n = int(input())
-segments = []
+list_l = []
+list_r = []
 
 for i in range(n):
-  segment = list(map(int, input().split()))
-  segments.append(segment)
+  l, r = list(map(int, input().split()))
+  list_l.append(l)
+  list_r.append(r)
 
-def cover(list1, list2):
-  return list1[0] <= list2[0] and list2[0] <= list2[1] and list2[1] <= list1[1]
+left = min(list_l)
+right = max(list_r)
+res = -1
 
-def big_segment(n, segments):
-  index = -1
-  for i in range(n):
-    count = 0
-    for j in range(n):
-      if segments[i] == segments[j]: continue
-      if cover(segments[i], segments[j]):
-        count += 1
-    if count == n - 1:
-      index = i + 1
-      break
-  print(index)
+for i in range(n):
+  if list_l[i] == left and list_r[i] == right:
+    res = i + 1
 
-big_segment(n, segments)
+print(res)
