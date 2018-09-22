@@ -1,3 +1,32 @@
+# Get the number of minutes to an integer
+# Get interesting minutes to an array
+#
+# In case of number of interesting minutes is smaller than or equal to 1
+#   Calculate difference between interesting minute and start minute which is 1
+#   If difference is larger than or equal to 15
+#     Print 15
+#   Else
+#     Print total of given interesting minute plus 15
+# Else
+#   Loop from start to end of interesting minutes array
+#     In case of first element
+#       Calculate difference between first minute and start minute which is 1
+#       If difference is larger than or equal to 15
+#         Print 15
+#         Exit from program
+#     Else
+#       Calculate difference between minute at index i and minute at index i - 1
+#       If difference is larger than 15
+#         Print total of minute at index i - 1 plus 15
+#         Exit from program
+#
+#   If there is no such number is printed while looping
+#     Calculate difference between last minute and end minute which is 90
+#     If difference is smaller than 15
+#       Print 90
+#     Else
+#       Print total of last minute plus 15
+
 n = int(input())
 minutes = list(map(int, input().split()))
 

@@ -19,7 +19,7 @@
 #         Print clone string
 #         Exit from program
 #
-#   If there is no such string are printed while looping
+#   If there is no such string is printed while looping
 #     Print 'No such string'
 
 s = input()
