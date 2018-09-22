@@ -1,47 +1,31 @@
-# In case of length of s and t equal 1
-#   Calculate difference between s and t
-#   If difference is larger than 1
-#     Print next alphabet character in ASCII table
-#   Else
-#     Print 'No such string'
+# Reverse loop string s
+# Check the very last character of s
+# If s[i] equals to 'z'
+#   Replace s[i] to 'a'
 # Else
-#   Create a new string which is a clone of s
-#   Loop from start to end of both string s and t
-#     Calculate absolute difference between s[i] and t[i]
-#     If difference is larger than or equal to 0
-#       Identify next alphabet character
-#       If s[i] equal to 'z'
-#         Replace current character of clone string with 'a'
-#       Else
-#         Replace current character of clone string with next alphabet character in ASCII table
-#     Compare clone string with s and t
-#       If clone string is larger than s and smaller than t
-#         Print clone string
-#         Exit from program
+#   Increse s[i]
+#   Break from loop
 #
-#   If there is no such string is printed while looping
-#     Print 'No such string'
+# If modified s is difference from t
+#   Print modified s
+# Else
+#   Print 'No such string'
 
 s = input()
 t = input()
-length = len(s)
 
-if length == 1:
-  dist = abs(ord(t) - ord(s))
-  if dist > 1:
-    print(chr(ord(s) + 1))
+s_list = list(s)
+
+for i in range(len(s) - 1, -1, -1):
+  if s[i] == 'z':
+    s_list[i] = 'a'
   else:
-    print('No such string')
+    s_list[i] = chr(ord(s[i]) + 1)
+    break
+
+res = ''.join(s_list)
+
+if res != t:
+  print(res)
 else:
-  s_clone = list(s)
-  for i in range(length - 1, -1, -1):
-    dist = abs(ord(t[i]) - ord(s[i]))
-    if dist >= 0:
-      if s[i] == 'z':
-        s_clone[i] = 'a'
-      else:
-        s_clone[i] = chr(ord(s[i]) + 1)
-    if ''.join(s_clone) > s and ''.join(s_clone) < t:
-      print(''.join(s_clone))
-      exit()
   print('No such string')
