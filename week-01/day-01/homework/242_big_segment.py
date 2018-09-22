@@ -16,8 +16,9 @@ def big_segment(n, segments):
       if segments[i] == segments[j]: continue
       if cover(segments[i], segments[j]):
         count += 1
-    if count == n:
+    if count == n - 1:
       index = i + 1
+      break
   print(index)
 
 big_segment(n, segments)
