@@ -2,7 +2,7 @@
 
 # Using sort: O(NlogN)
 
-from queue import PriorityQueue
+import heapq
 
 class Topic:
   def __init__(self, id = 0, z_score = 0, change = 0):
@@ -17,15 +17,15 @@ class Topic:
 
 N = int(input())
 
-pq = PriorityQueue()
+pq = []
 
 for _ in range(N):
   ID, Z, P, L, C, S = map(int, input().split())
   new_Z = P * 50 + L * 5 + C * 10 + S * 20
   change = new_Z - Z
   topic = Topic(ID, new_Z, change)
-  pq.put(topic)
+  heapq.heappush(pq, topic)
 
 for _ in range(5):
-  topic = pq.get()
+  topic = heapq.heappop(pq)
   print(topic.id, topic.z_score)
