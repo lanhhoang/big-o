@@ -2,6 +2,8 @@
 
 # Using sort: O(NlogN)
 
+from queue import PriorityQueue
+
 class Topic:
   def __init__(self, id = 0, z_score = 0, change = 0):
     self.id = id
@@ -15,17 +17,15 @@ class Topic:
 
 N = int(input())
 
-topics = []
+pq = PriorityQueue()
 
 for _ in range(N):
   ID, Z, P, L, C, S = map(int, input().split())
   new_Z = P * 50 + L * 5 + C * 10 + S * 20
   change = new_Z - Z
   topic = Topic(ID, new_Z, change)
-  topics.append(topic)
+  pq.put(topic)
 
-topics.sort()
-
-for i in range(5):
-  topic = topics[i]
+for _ in range(5):
+  topic = pq.get()
   print(topic.id, topic.z_score)
