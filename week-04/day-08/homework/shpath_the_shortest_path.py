@@ -22,6 +22,8 @@ def dijkstra(n, src, dest):
     top = heappop(pq)
     u = top.id
     w = top.cost
+    if u == dest:
+      break
     for neighbor in graph[u]:
       if w + neighbor.cost < dist[neighbor.id]:
         dist[neighbor.id] = w + neighbor.cost
