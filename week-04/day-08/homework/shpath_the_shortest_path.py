@@ -1,10 +1,8 @@
 # https://www.spoj.com/problems/SHPATH
 
-from queue import PriorityQueue
+from heapq import heappush, heappop
 
-MAX = 10001
 INF = int(1e9)
-graph = [[] for _ in range(MAX)]
 
 class Node:
   def __init__(self, id, cost):
@@ -14,20 +12,21 @@ class Node:
   def __lt__(self, other):
     return self.cost < other.cost
 
-def dijkstra(s):
-  pq = PriorityQueue()
-  pq.put(Node(s, 0))
-  dist[s] = 0
+def dijkstra(n, src, dest):
+  pq = []
+  dist = [INF for _ in range(n + 1)]
+  heappush(pq, Node(src, 0))
+  dist[src] = 0
 
-  while not pq.empty():
-    top = pq.get()
+  while len(pq) != 0:
+    top = heappop(pq)
     u = top.id
     w = top.cost
     for neighbor in graph[u]:
       if w + neighbor.cost < dist[neighbor.id]:
         dist[neighbor.id] = w + neighbor.cost
-        pq.put(Node(neighbor.id, dist[neighbor.id]))
-        path[neighbor.id] = u
+        heappush(pq, Node(neighbor.id, dist[neighbor.id]))
+  print(dist[dest])
 
 def inp():
   return int(input())
@@ -36,6 +35,7 @@ if __name__ == '__main__':
   s = inp()
   for test in range(s):
     n = inp()
+    graph = [[] for _ in range(n + 1)]
     cities = {}
     for i in range(1, n + 1):
       name = input().strip()
@@ -47,13 +47,10 @@ if __name__ == '__main__':
 
     r = int(input())
     for _ in range(r):
-      dist = [INF for _ in range(MAX)]
-      path = [-1 for _ in range(MAX)]
       source, destination = map(str, input().split())
-      start = cities.get(source)
-      end = cities.get(destination)
-      dijkstra(start)
-      print(dist[end])
+      dijkstra(n, cities[source], cities[destination])
     # read empty line
+    for i in range(1, n + 1):
+      graph[i].clear()
     if test < s - 1:
       empty = input().strip()
