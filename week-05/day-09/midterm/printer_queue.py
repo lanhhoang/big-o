@@ -1,4 +1,7 @@
 # https://www.spoj.com/problems/PQUEUE/
+#
+# queue < pair < priority, index > > : to store the priority and index of the current job.
+# priority_queue < priority > : to store the priorities in decreasing order.
 
 from collections import deque
 from heapq import heappush, heappop
