@@ -8,7 +8,7 @@ class Point:
   def __init__(self, a, b, t = 0):
     self.x = a
     self.y = b
-    self.t = t
+    self.time = t
 
 def isValid(v, matrix):
   return v.x >= 0 and v.x < R and v.y >= 0 and v.y < C and matrix[v.x][v.y] == '.'
@@ -25,13 +25,13 @@ def BFS(start, end, matrix):
   while len(queue) != 0:
     u = queue.popleft()
     if u.x == end.x and u.y == end.y:
-      print(u.t)
+      print(u.time)
       return
     for k in range(4):
-      v = Point(u.x + dx[k], u.y + dy[k], u.t + 1)
+      v = Point(u.x + dx[k], u.y + dy[k], u.time + 1)
       if isValid(v, matrix) and not visited[v.x][v.y]:
         visited[v.x][v.y] = True
-        queue.append(Point(v.x, v.y, v.t))
+        queue.append(v)
 
 while True:
   R, C = map(int, input().split())
