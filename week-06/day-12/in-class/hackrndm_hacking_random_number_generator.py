@@ -12,11 +12,13 @@ def binarySearch(arr, left, right, x):
   return False
 
 n, k = map(int, input().split())
-numbers = list(map(int, input().split()))
-numbers.sort()
+numbers = list(map(int, input().split())) # O(N)
+numbers.sort() # O(NlogN)
 count = 0
-for i in range(n):
+for i in range(n): # O(NlogN)
   x = k + numbers[i]
   if binarySearch(numbers, i + 1, n - 1, x) == True:
     count += 1
 print(count)
+
+# Complexity: O(NlogN)
