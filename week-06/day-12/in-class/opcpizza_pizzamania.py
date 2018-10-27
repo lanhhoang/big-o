@@ -18,11 +18,10 @@ for _ in range(t):
   money = list(map(int, input().split())) # O(N)
   money.sort() # O(NlogN)
   count = 0
-  for m in money: # O(NlogN)
-    x = price - m
-    res = binarySearch(money, 0, n - 1, x)
-    if res == True:
+  for i in range(n): # O(NlogN)
+    x = price - money[i]
+    if binarySearch(money, i + 1, n - 1, x) == True:
       count += 1
-  print(count // 2)
+  print(count)
 
 # Complexity: O(T * NlogN)
