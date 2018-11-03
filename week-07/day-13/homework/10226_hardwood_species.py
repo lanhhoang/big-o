@@ -24,3 +24,29 @@ for t in range(T):
     print(name, population)
   if t < T - 1:
     print()
+
+# =========================================================
+
+# T = int(input())
+# input()
+# for t in range(T):
+#   species = dict()
+#   count = 0
+#   while True:
+#     try:
+#       name = input()
+#       if name == '':
+#         break
+#       if name in species:
+#         species[name] += 1
+#       else:
+#         species[name] = 1
+#       count += 1
+#     except EOFError:
+#       break
+#   for item in sorted(species.items()):
+#     name = item[0]
+#     population = "{:.4f}".format(item[1] / count * 100)
+#     print(name, population)
+#   if t < T - 1:
+#     print()
