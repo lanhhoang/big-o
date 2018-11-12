@@ -26,9 +26,8 @@ class Node:
     return self.dist <= other.dist
 
 def prim(graph, src):
-  N = len(graph)
-  dist = [INF for _ in range(N)]
-  visited = [False] * N
+  dist = [INF for _ in range(N + 1)]
+  visited = [False] * (N + 1)
   weight = 0
   dist[src] = 0
   pq = []
@@ -38,12 +37,12 @@ def prim(graph, src):
     top = heappop(pq)
     u = top.id
     visited[u] = True
-    for v in range(N):
+    for v in range(1, N + 1):
       if not visited[v] and dist[v] > graph[u][v]:
         dist[v] = graph[u][v]
         heappush(pq, Node(v, dist[v]))
 
-  for i in range(N):
+  for i in range(1, N + 1):
     weight += dist[i]
   return weight
 
@@ -53,20 +52,18 @@ def distance(x1, y1, x2, y2):
 
 while True:
   N = int(Scanner.next())
-  x = [0] * N
-  y = [0] * N
-  for i in range(N):
+  x = [0] * (N + 1)
+  y = [0] * (N + 1)
+  for i in range(1, N + 1):
     x[i], y[i] = int(Scanner.next()), int(Scanner.next())
-  graph = []
-  for i in range(N):
-    graph.append([])
-    for j in range(N):
+  graph = [[] for _ in range(N + 1)]
+  for i in range(1, N + 1):
+    graph[i].append(0.0)
+    for j in range(1, N + 1):
       graph[i].append(distance(x[i], y[i], x[j], y[j]))
   M = int(Scanner.next())
   for _ in range(M):
     u, v = int(Scanner.next()), int(Scanner.next())
-    u -= 1
-    v -= 1
     graph[u][v] = 0
     graph[v][u] = 0
-  print("%.2f" % prim(graph, 0))
+  print("%.2f" % prim(graph, 1))
