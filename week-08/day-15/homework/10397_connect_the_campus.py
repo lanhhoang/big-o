@@ -17,7 +17,6 @@ class Scanner:
   sc = __generator__()
   def next():
     return Scanner.sc.__next__()
-
 class Node:
   def __init__(self, id, dist):
     self.id = id
@@ -54,16 +53,18 @@ while True:
   N = int(Scanner.next())
   x = [0] * (N + 1)
   y = [0] * (N + 1)
-  for i in range(1, N + 1):
+  for i in range(1, N + 1): # O(N)
     x[i], y[i] = int(Scanner.next()), int(Scanner.next())
   graph = [[] for _ in range(N + 1)]
-  for i in range(1, N + 1):
+  for i in range(1, N + 1): # O(N^2)
     graph[i].append(0.0)
     for j in range(1, N + 1):
       graph[i].append(distance(x[i], y[i], x[j], y[j]))
   M = int(Scanner.next())
-  for _ in range(M):
+  for _ in range(M): # O(M)
     u, v = int(Scanner.next()), int(Scanner.next())
     graph[u][v] = 0
     graph[v][u] = 0
-  print("%.2f" % prim(graph, 1))
+  print("%.2f" % prim(graph, 1)) # O(NlogN)
+
+# Complexity: O(T * N^2)
